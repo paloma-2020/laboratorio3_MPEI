@@ -1,1 +1,248 @@
-holis
+/*
+ * File:   main.c
+ * Author: idmelol
+ *
+ * Created on September 19, 2020, 12:35 PM
+ */
+
+ 
+
+
+/*
+ * File:   main.c
+ * Author: idmelol
+ *
+ * Created on February 16, 2020, 5:52 PM
+ */
+
+ 
+
+#include "config.h"
+//#include <xc.h>
+#include "reloj.h"
+#include <string.h> 
+//#include "../h/p24F16KA102.h"
+#include <libpic30.h>
+
+ 
+
+ 
+
+int tiempo=1000;
+int tiempo_vis=1;
+int main(void) {
+    //Configuracion micro 
+    AD1PCFG=0xFFFF;//todo como digital
+    TRISB=0x0000;
+    //Declaracion de variables
+
+ 
+
+ 
+    int i[4]=0;
+    while(1){
+        disp1(i[0]);
+        disp2(i[1]);
+        disp3(i[2]);
+        disp4(i[3]);
+         __delay_ms(tiempo);
+        if(i==9999){
+            i=0;
+        }
+        i++;
+    }
+   return 0;
+}
+
+
+
+void disp1(int a){
+  //prender numero 1
+    PORTBbits.RB7=0;
+    PORTBbits.RB8=1;
+    PORTBbits.RB9=1;
+    PORTBbits.RB10=1;
+    numero(a);
+}
+
+ 
+
+void disp2(int a){
+  //prender numero 2
+    PORTBbits.RB7=1;
+    PORTBbits.RB8=0;
+    PORTBbits.RB9=1;
+    PORTBbits.RB10=1;
+    numero(a);
+}
+
+ 
+
+void disp3(int a){
+  //prender numero 3
+    PORTBbits.RB7=1;
+    PORTBbits.RB8=1;
+    PORTBbits.RB9=0;
+    PORTBbits.RB10=1;
+    numero(a);
+}
+
+ 
+
+void disp4(int a){
+  //prender numero 4
+    PORTBbits.RB7=1;
+    PORTBbits.RB8=1;
+    PORTBbits.RB9=1;
+    PORTBbits.RB10=0;
+    numero(a);
+}
+void numero(int b){
+    switch(b){
+            case 1: 
+                uno();
+            break;
+            case 2:
+                dos();
+            break;
+            case 3:
+                tres();
+            break;
+            case 4:                
+                cuatro();
+            break;
+            case 5:
+                cinco();
+            break;
+            case 6:
+                seis();
+            break;
+            case 7:
+                siete();
+            break;
+            case 8:
+                ocho();
+            break;
+            case 9:
+                nueve();
+            break;
+        }
+};
+
+ 
+
+
+//numeros
+
+ 
+
+void uno(){
+        PORTBbits.RB0=0;
+        PORTBbits.RB1=1;
+        PORTBbits.RB2=1;
+        PORTBbits.RB3=0;
+        PORTBbits.RB4=0;
+        PORTBbits.RB5=0;
+        PORTBbits.RB15=0;
+        __delay_ms(tiempo_vis); 
+}
+
+ 
+
+void dos(){
+        PORTBbits.RB0=1;
+        PORTBbits.RB1=1;
+        PORTBbits.RB2=0;
+        PORTBbits.RB3=1;
+        PORTBbits.RB4=1;
+        PORTBbits.RB5=0;
+        PORTBbits.RB15=1;
+        __delay_ms(tiempo_vis); 
+}
+
+ 
+
+void tres(){
+        PORTBbits.RB0=1;
+        PORTBbits.RB1=1;
+        PORTBbits.RB2=1;
+        PORTBbits.RB3=1;
+        PORTBbits.RB4=0;
+        PORTBbits.RB5=0;
+        PORTBbits.RB15=1;
+        __delay_ms(tiempo_vis); 
+}
+
+ 
+
+void cuatro(){
+        PORTBbits.RB0=0;
+        PORTBbits.RB1=1;
+        PORTBbits.RB2=1;
+        PORTBbits.RB3=0;
+        PORTBbits.RB4=0;
+        PORTBbits.RB5=1;
+        PORTBbits.RB15=1;
+        __delay_ms(tiempo_vis); 
+}
+void cinco(){
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=1;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=1;
+    PORTBbits.RB5=0;
+    PORTBbits.RB6=0;
+    __delay_ms(tiempo_vis);
+ }
+
+
+ void seis(){
+     PORTBbits.RB0=0;
+     PORTBbits.RB1=1;
+     PORTBbits.RB2=0;
+     PORTBbits.RB3=0;
+     PORTBbits.RB4=0;
+     PORTBbits.RB5=0;
+     PORTBbits.RB6=0;
+ __delay_ms(tiempo_vis);
+ }
+
+
+
+void siete(){
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=1;
+    PORTBbits.RB4=1;
+    PORTBbits.RB5=1;
+    PORTBbits.RB6=1;
+    __delay_ms(tiempo_vis);
+ }
+
+
+
+void ocho(){
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=0;
+    PORTBbits.RB5=0;
+    PORTBbits.RB6=0;
+    __delay_ms(tiempo_vis);
+ }
+
+
+
+void nueve(){
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=1;
+    PORTBbits.RB5=0;
+    PORTBbits.RB6=0;
+    __delay_ms(tiempo_vis);
+ }
