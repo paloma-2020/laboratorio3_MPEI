@@ -29,7 +29,7 @@
  
 
 int tiempo=1000;
-int tiempo_vis=1;
+int tiempo_vis=100;
 int main(void) {
     //Configuracion micro 
     AD1PCFG=0xFFFF;//todo como digital
@@ -39,15 +39,27 @@ int main(void) {
  
 
  
-    int i[4]=0;
+    int i,j,k,l=0;
     while(1){
-        disp1(i[0]);
-        disp2(i[1]);
-        disp3(i[2]);
-        disp4(i[3]);
+        disp1(i);
+        disp2(j);
+        disp3(k);
+        disp4(l);
          __delay_ms(tiempo);
-        if(i==9999){
+        if(i==9){
             i=0;
+            j++;
+        }
+        if(j==9){
+            j=0;
+            k++;
+        } 
+        if(k==9){
+            k=0;
+            l++;
+        }
+        if(l==9){
+            l=0;
         }
         i++;
     }
@@ -59,8 +71,8 @@ int main(void) {
 void disp1(int a){
   //prender numero 1
     PORTBbits.RB7=0;
-    PORTBbits.RB8=1;
-    PORTBbits.RB9=1;
+    PORTBbits.RB8=0;
+    PORTBbits.RB9=0;
     PORTBbits.RB10=1;
     numero(a);
 }
@@ -69,10 +81,10 @@ void disp1(int a){
 
 void disp2(int a){
   //prender numero 2
-    PORTBbits.RB7=1;
+    PORTBbits.RB7=0;
     PORTBbits.RB8=0;
     PORTBbits.RB9=1;
-    PORTBbits.RB10=1;
+    PORTBbits.RB10=0;
     numero(a);
 }
 
@@ -80,10 +92,10 @@ void disp2(int a){
 
 void disp3(int a){
   //prender numero 3
-    PORTBbits.RB7=1;
+    PORTBbits.RB7=0;
     PORTBbits.RB8=1;
     PORTBbits.RB9=0;
-    PORTBbits.RB10=1;
+    PORTBbits.RB10=0;
     numero(a);
 }
 
@@ -92,13 +104,16 @@ void disp3(int a){
 void disp4(int a){
   //prender numero 4
     PORTBbits.RB7=1;
-    PORTBbits.RB8=1;
-    PORTBbits.RB9=1;
+    PORTBbits.RB8=0;
+    PORTBbits.RB9=0;
     PORTBbits.RB10=0;
     numero(a);
 }
 void numero(int b){
     switch(b){
+            case 0: 
+                cero();
+            break;
             case 1: 
                 uno();
             break;
@@ -136,54 +151,60 @@ void numero(int b){
 
  
 
-void uno(){
-        PORTBbits.RB0=0;
-        PORTBbits.RB1=1;
-        PORTBbits.RB2=1;
-        PORTBbits.RB3=0;
-        PORTBbits.RB4=0;
-        PORTBbits.RB5=0;
-        PORTBbits.RB15=0;
-        __delay_ms(tiempo_vis); 
-}
+void cero(){
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=0;
+    PORTBbits.RB5=0;
+    PORTBbits.RB6=1;
+    __delay_ms(tiempo_vis);
+ }
 
- 
+ void uno(){
+     PORTBbits.RB0=1;
+     PORTBbits.RB1=0;
+     PORTBbits.RB2=0;
+     PORTBbits.RB3=1;
+     PORTBbits.RB4=1;
+     PORTBbits.RB5=1;
+     PORTBbits.RB6=1;
+     __delay_ms(tiempo_vis);
+ }
 
 void dos(){
-        PORTBbits.RB0=1;
-        PORTBbits.RB1=1;
-        PORTBbits.RB2=0;
-        PORTBbits.RB3=1;
-        PORTBbits.RB4=1;
-        PORTBbits.RB5=0;
-        PORTBbits.RB15=1;
-        __delay_ms(tiempo_vis); 
-}
-
- 
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=1;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=0;
+    PORTBbits.RB5=1;
+    PORTBbits.RB6=0;
+    __delay_ms(tiempo_vis);
+ }
 
 void tres(){
-        PORTBbits.RB0=1;
-        PORTBbits.RB1=1;
-        PORTBbits.RB2=1;
-        PORTBbits.RB3=1;
-        PORTBbits.RB4=0;
-        PORTBbits.RB5=0;
-        PORTBbits.RB15=1;
-        __delay_ms(tiempo_vis); 
-}
-
- 
+    PORTBbits.RB0=0;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=0;
+    PORTBbits.RB4=1;
+    PORTBbits.RB5=1;
+    PORTBbits.RB6=0;
+    __delay_ms(tiempo_vis);
+ }
 
 void cuatro(){
-        PORTBbits.RB0=0;
-        PORTBbits.RB1=1;
-        PORTBbits.RB2=1;
-        PORTBbits.RB3=0;
-        PORTBbits.RB4=0;
-        PORTBbits.RB5=1;
-        PORTBbits.RB15=1;
-        __delay_ms(tiempo_vis); 
+    PORTBbits.RB0=1;
+    PORTBbits.RB1=0;
+    PORTBbits.RB2=0;
+    PORTBbits.RB3=1;
+    PORTBbits.RB4=1;
+    PORTBbits.RB5=0;
+    PORTBbits.RB6=0;
+    
+    __delay_ms(tiempo_vis);
 }
 void cinco(){
     PORTBbits.RB0=0;
