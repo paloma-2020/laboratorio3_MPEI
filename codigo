@@ -40,6 +40,7 @@ int main(void) {
 
  
     int i,j,k,l=0;
+    int m=1;// cambiar este valor reeplazar luego con el boton
     while(1){
         disp1(i);
         disp2(j);
@@ -47,83 +48,87 @@ int main(void) {
         disp4(l);
          __delay_ms(tiempo);
         // conteo ascendente 
-        if(l==9& k==9 & j==9 & i==9){
-            k=0;
-            j=0;
-            i=0;
-            l=0;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
+        if (m==0){
+            if(l==9& k==9 & j==9 & i==9){
+                k=0;
+                j=0;
+                i=0;
+                l=0;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            if(k==9 & j==9 & i==9){
+                k=0;
+                j=0;
+                i=0;
+                l++;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            if(j==9 & i==9){
+                j=0;
+                i=0;
+                k++;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            } 
+            if(i==9){
+                i=0;
+                j++;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            i++;
         }
-        if(k==9 & j==9 & i==9){
-            k=0;
-            j=0;
-            i=0;
-            l++;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
+        else{
+            // conteo ascendente
+            if(l==0 & k==0 & j==0 & i==0){
+                k=9;
+                j=9;
+                i=9;
+                l=9;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            if(k==0 & j==0 & i==0){
+                k=9;
+                j=9;
+                i=9;
+                l--;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            if(j==0 & i==0){
+                j=9;
+                i=9;
+                k--;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            } 
+            if(i==0){
+                i=9;
+                j--;
+                disp1(i);
+                disp2(j);
+                disp3(k);
+                disp4(l);
+            }
+            i--;
         }
-        if(j==9 & i==9){
-            j=0;
-            i=0;
-            k++;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        } 
-        if(i==9){
-            i=0;
-            j++;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        }
-        i++;
-        // conteo ascendente
-        /*if(l==0 & k==0 & j==0 & i==0){
-            k=9;
-            j=9;
-            i=9;
-            l=9;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        }
-        if(k==0 & j==0 & i==0){
-            k=9;
-            j=9;
-            i=9;
-            l--;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        }
-        if(j==0 & i==0){
-            j=9;
-            i=9;
-            k--;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        } 
-        if(i==0){
-            i=9;
-            j--;
-            disp1(i);
-            disp2(j);
-            disp3(k);
-            disp4(l);
-        }
-        i--;*/
     }
    return 0;
 }
