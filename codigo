@@ -28,8 +28,8 @@
 
  
 
-int tiempo=100;
-int tiempo_vis=100;
+int tiempo=350;
+int tiempo_vis=48;
 int main(void) {
     //Configuracion micro 
     AD1PCFG=0xFFFF;//todo como digital
