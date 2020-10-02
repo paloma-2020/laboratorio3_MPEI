@@ -1,19 +1,12 @@
 /*
  * File:   main.c
- * Author: idmelol
- *
- * Created on September 19, 2020, 12:35 PM
+ * Nombre: Codigo simulacion laboratorio 3
+ * Author: 
+ * Paloma Alvarez peniche
+ * Laura Daniela Fandiño
+ * Created on Octubre 02, 2020, 11:04 AM
  */
 
- 
-
-
-/*
- * File:   main.c
- * Author: idmelol
- *
- * Created on February 16, 2020, 5:52 PM
- */
 
  
 
@@ -27,25 +20,32 @@
  
 
  
-
+int m=0;
 int tiempo=350;
 int tiempo_vis=48;
 int main(void) {
     //Configuracion micro 
     AD1PCFG=0xFFFF;//todo como digital
     TRISB=0x0000;
+    TRISBbits.TRISB11=1; //definir puerto como entrada
     //Declaracion de variables
 
  
 
  
     int i,j,k,l=0;
-    int m=1;// cambiar este valor reeplazar luego con el boton
+    //int m=0;// cambiar este valor reeplazar luego con el boton
     while(1){
         disp1(i);
+        boton();
         disp2(j);
+        boton();
         disp3(k);
+        boton();
         disp4(l);
+        boton();
+        dispa(l);
+        boton();
          __delay_ms(tiempo);
         // conteo ascendente 
         if (m==0){
@@ -58,6 +58,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             if(k==9 & j==9 & i==9){
                 k=0;
@@ -68,6 +69,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             if(j==9 & i==9){
                 j=0;
@@ -77,6 +79,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             } 
             if(i==9){
                 i=0;
@@ -85,6 +88,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             i++;
         }
@@ -99,6 +103,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             if(k==0 & j==0 & i==0){
                 k=9;
@@ -109,6 +114,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             if(j==0 & i==0){
                 j=9;
@@ -118,6 +124,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             } 
             if(i==0){
                 i=9;
@@ -126,6 +133,7 @@ int main(void) {
                 disp2(j);
                 disp3(k);
                 disp4(l);
+                dispa(l);
             }
             i--;
         }
@@ -133,7 +141,19 @@ int main(void) {
    return 0;
 }
 
-
+int boton(){
+    if(PORTBbits.RB11==1){
+        //__delay_ms(120);
+        while(PORTBbits.RB11==1); //se detecto un pulso
+        if(m>1){
+        m=0;
+        }
+        else{
+        m++;
+        }
+    }
+    return m;
+};
 
 void disp1(int a){
   //prender numero 1
@@ -175,6 +195,14 @@ void disp4(int a){
     PORTBbits.RB9=0;
     PORTBbits.RB10=0;
     numero(a);
+}
+void dispa(int a){  
+    PORTBbits.RB7=0;
+    PORTBbits.RB8=0;
+    PORTBbits.RB9=0;
+    PORTBbits.RB10=0;
+    numero(a);
+    
 }
 void numero(int b){
     switch(b){
