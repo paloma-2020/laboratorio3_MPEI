@@ -21,8 +21,8 @@
 
  
 int m=0;
-int tiempo=350;
-int tiempo_vis=48;
+int tiempo_vis=8;
+int tiempo=10;
 int main(void) {
     //Configuracion micro 
     AD1PCFG=0xFFFF;//todo como digital
@@ -36,105 +36,56 @@ int main(void) {
     int i,j,k,l=0;
     //int m=0;// cambiar este valor reeplazar luego con el boton
     while(1){
-        disp1(i);
-        boton();
-        disp2(j);
-        boton();
-        disp3(k);
-        boton();
-        disp4(l);
-        boton();
-        dispa(l);
-        boton();
-         __delay_ms(tiempo);
         // conteo ascendente 
         if (m==0){
-            if(l==9& k==9 & j==9 & i==9){
+            if(l==9& k==9 & j==9 & i>9){
                 k=0;
                 j=0;
                 i=0;
                 l=0;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
-            if(k==9 & j==9 & i==9){
+            if(k==9 & j==9 & i>9){
                 k=0;
                 j=0;
                 i=0;
                 l++;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
-            if(j==9 & i==9){
+            if(j==9 & i>9){
                 j=0;
                 i=0;
                 k++;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             } 
-            if(i==9){
+            if(i>9){
                 i=0;
                 j++;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
+            numero(i,j,k,l);
             i++;
         }
         else{
-            // conteo ascendente
+            // conteo decendente
             if(l==0 & k==0 & j==0 & i==0){
                 k=9;
                 j=9;
                 i=9;
                 l=9;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
-            if(k==0 & j==0 & i==0){
+            if(k==0 & j==0 & i<0){
                 k=9;
                 j=9;
                 i=9;
                 l--;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
-            if(j==0 & i==0){
+            if(j==0 & i<0){
                 j=9;
                 i=9;
                 k--;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             } 
-            if(i==0){
+            if(i<0){
                 i=9;
                 j--;
-                disp1(i);
-                disp2(j);
-                disp3(k);
-                disp4(l);
-                dispa(l);
             }
+            numero(i,j,k,l);
             i--;
         }
     }
@@ -155,89 +106,244 @@ int boton(){
     return m;
 };
 
-void disp1(int a){
+void disp1(){
   //prender numero 1
     PORTBbits.RB7=0;
     PORTBbits.RB8=0;
     PORTBbits.RB9=0;
     PORTBbits.RB10=1;
-    numero(a);
+    boton();
 }
 
  
 
-void disp2(int a){
+void disp2(){
   //prender numero 2
     PORTBbits.RB7=0;
     PORTBbits.RB8=0;
     PORTBbits.RB9=1;
     PORTBbits.RB10=0;
-    numero(a);
+    boton();
 }
 
  
 
-void disp3(int a){
+void disp3(){
   //prender numero 3
     PORTBbits.RB7=0;
     PORTBbits.RB8=1;
     PORTBbits.RB9=0;
     PORTBbits.RB10=0;
-    numero(a);
+    boton();
 }
 
  
 
-void disp4(int a){
+void disp4(){
   //prender numero 4
     PORTBbits.RB7=1;
     PORTBbits.RB8=0;
     PORTBbits.RB9=0;
     PORTBbits.RB10=0;
-    numero(a);
+    boton();
 }
-void dispa(int a){  
+void dispa(){  
     PORTBbits.RB7=0;
     PORTBbits.RB8=0;
     PORTBbits.RB9=0;
     PORTBbits.RB10=0;
-    numero(a);
-    
+    boton(); 
 }
-void numero(int b){
-    switch(b){
-            case 0: 
-                cero();
-            break;
-            case 1: 
+void numero(int i ,int j, int k, int l){
+    int c=0;
+    while(c<tiempo){
+        //numero para el primer display
+        switch(i){
+            case 0:
+                disp1();
+                cero ();
+            case 1:
+
+                disp1();
                 uno();
             break;
             case 2:
+
+                disp1();
                 dos();
             break;
             case 3:
+
+                disp1();
                 tres();
             break;
-            case 4:                
+            case 4:               
+                disp1(); 
                 cuatro();
             break;
-            case 5:
+            case 5:               
+                disp1(); 
                 cinco();
             break;
-            case 6:
+            case 6:               
+                disp1(); 
                 seis();
             break;
-            case 7:
+            case 7:               
+                disp1(); 
                 siete();
             break;
-            case 8:
+            case 8:               
+                disp1(); 
                 ocho();
             break;
-            case 9:
+            case 9:               
+                disp1(); 
                 nueve();
             break;
         }
-};
+        dispa();
+        //numero para el segundo display
+        switch(j){
+            case 0:
+                disp2();
+                cero ();
+            case 1:
+
+                disp2();
+                uno();
+            break;
+            case 2:
+
+                disp2();
+                dos();
+            break;
+            case 3:
+
+                disp2();
+                tres();
+            break;
+            case 4:               
+                disp2(); 
+                cuatro();
+            break;
+            case 5:               
+                disp2(); 
+                cinco();
+            break;
+            case 6:               
+                disp2(); 
+                seis();
+            break;
+            case 7:               
+                disp2(); 
+                siete();
+            break;
+            case 8:               
+                disp2(); 
+                ocho();
+            break;
+            case 9:               
+                disp2(); 
+                nueve();
+            break;
+        }
+        dispa();
+        //numero para el tercer display
+        switch(k){
+            case 0:
+                disp3();
+                cero ();
+            case 1:
+
+                disp3();
+                uno();
+            break;
+            case 2:
+
+                disp3();
+                dos();
+            break;
+            case 3:
+
+                disp3();
+                tres();
+            break;
+            case 4:               
+                disp3(); 
+                cuatro();
+            break;
+            case 5:               
+                disp3(); 
+                cinco();
+            break;
+            case 6:               
+                disp3(); 
+                seis();
+            break;
+            case 7:               
+                disp3(); 
+                siete();
+            break;
+            case 8:               
+                disp3(); 
+                ocho();
+            break;
+            case 9:               
+                disp3(); 
+                nueve();
+            break;
+        }
+        dispa();
+        //numero para el cuarto display
+        switch(l){
+            case 0:
+                disp4();
+                cero ();
+            case 1:
+
+                disp4();
+                uno();
+            break;
+            case 2:
+
+                disp4();
+                dos();
+            break;
+            case 3:
+
+                disp4();
+                tres();
+            break;
+            case 4:               
+                disp4(); 
+                cuatro();
+            break;
+            case 5:               
+                disp4(); 
+                cinco();
+            break;
+            case 6:               
+                disp4(); 
+                seis();
+            break;
+            case 7:               
+                disp4(); 
+                siete();
+            break;
+            case 8:               
+                disp4(); 
+                ocho();
+            break;
+            case 9:               
+                disp4(); 
+                nueve();
+            break;
+        }
+        dispa();
+        c++; 
+    }
+}
 
  
 
