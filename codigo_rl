@@ -18,9 +18,195 @@
 #include <libpic30.h>
 
 
+ 
 
-
+ 
 int m=0;
+int tiempo_vis=8;
+int tiempo=10;
+int main(void) {
+    //Configuracion micro 
+    AD1PCFG=0xFFFF;//todo como digital
+    TRISB=0x0000;
+    TRISBbits.TRISB13=1; //definir puerto como entrada
+    //Declaracion de variables
+
+
+ 
+
+ 
+    int i,j=0;
+    //int m=0;// cambiar este valor reeplazar luego con el boton
+    while(1){
+        // conteo ascendente 
+        if (m==0){
+            if(j==9 & i>9){
+                j=0;
+                i=0;
+            } 
+            if(i>9){
+                i=0;
+                j++;
+            }
+            numero(i,j);
+            i++;
+        }
+        else{
+            // conteo decendente
+            if(j==0 & i<0){
+                j=9;
+                i=9;
+            } 
+            if(i<0){
+                i=9;
+                j--;
+            }
+            numero(i,j);
+            i--;
+        }
+    }
+   return 0;
+}
+
+int boton(){
+    if(PORTBbits.RB13==1){
+        //__delay_ms(120);
+        while(PORTBbits.RB13==1); //se detecto un pulso
+        if(m>1){
+        m=0;
+        }
+        else{
+        m++;
+        }
+    }
+    return m;
+};
+// displays
+void disp1(){
+  //prender numero 1
+    PORTBbits.RB10=0;
+    PORTBbits.RB11=1;
+    boton();
+}
+
+void disp2(){
+  //prender numero 2
+    PORTBbits.RB10=1;
+    PORTBbits.RB11=0;
+    boton();
+}
+
+void dispa(){  
+    PORTBbits.RB10=0;
+    PORTBbits.RB11=0;
+    boton(); 
+}
+
+void numero(int i ,int j){
+    int c=0;
+    while(c<tiempo){
+        //numero para el primer display
+        switch(i){
+            case 0:
+                disp1();
+                cero ();
+            case 1:
+
+                disp1();
+                uno();
+            break;
+            case 2:
+
+                disp1();
+                dos();
+            break;
+            case 3:
+
+                disp1();
+                tres();
+            break;
+            case 4:               
+                disp1(); 
+                cuatro();
+            break;
+            case 5:               
+                disp1(); 
+                cinco();
+            break;
+            case 6:               
+                disp1(); 
+                seis();
+            break;
+            case 7:               
+                disp1(); 
+                siete();
+            break;
+            case 8:               
+                disp1(); 
+                ocho();
+            break;
+            case 9:               
+                disp1(); 
+                nueve();
+            break;
+        }
+        dispa();
+        //numero para el segundo display
+        switch(j){
+            case 0:
+                disp2();
+                cero ();
+            case 1:
+
+                disp2();
+                uno();
+            break;
+            case 2:
+
+                disp2();
+                dos();
+            break;
+            case 3:
+
+                disp2();
+                tres();
+            break;
+            case 4:               
+                disp2(); 
+                cuatro();
+            break;
+            case 5:               
+                disp2(); 
+                cinco();
+            break;
+            case 6:               
+                disp2(); 
+                seis();
+            break;
+            case 7:               
+                disp2(); 
+                siete();
+            break;
+            case 8:               
+                disp2(); 
+                ocho();
+            break;
+            case 9:               
+                disp2(); 
+                nueve();
+            break;
+        }
+        dispa();
+        c++; 
+    }
+}
+
+ 
+
+
+
+
+/*int m=0;
 int tiempo=350;
 int tiempo_vis=48;
 int main(void) {
@@ -155,7 +341,7 @@ void numero(int b){
 };
 
  
-
+*/
 
 //numeros
 
@@ -264,8 +450,6 @@ void ocho(){
     PORTBbits.RB9=0;
     __delay_ms(tiempo_vis);
  }
-
-
 
 void nueve(){
     PORTBbits.RB2=0;
